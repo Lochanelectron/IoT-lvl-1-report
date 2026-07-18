@@ -133,4 +133,87 @@ A DC motor’s speed depends directly on the voltage applied to it. If you have 
 ​
 Instead of delivering a steady, lower voltage, PWM delivers rapid pulses of full voltage. The motor reacts to the average voltage over time because its internal mechanical inertia and electrical inductance smooth out the rapid spikes.
 
+## Task 3a
+
+The Internet of Things (IoT) is a network of physical devices (such as sensors, microcontrollers, and actuators) that collect, exchange, and process data over a network. IoT enables devices to communicate with each other or with cloud services for monitoring, automation, and remote control.
+
+Key Features:
+
+- Connects smart devices via the internet or local networks.
+- Enables real-time data collection and monitoring.
+- Supports automation and remote access.
+- Commonly uses protocols such as MQTT, HTTP, CoAP, I2C, and SPI.
+
+### MQTT (Message queing telemetry transport)
+MQTT is a lightweight publish-subscribe messaging protocol designed for IoT devices with limited bandwidth and power.
+
+- Uses a broker (e.g., Mosquitto) to relay messages.
+- Devices publish data to a topic, while others subscribe to receive updates.
+- Low bandwidth and power consumption.
+- Best for sensor monitoring, smart homes, and industrial IoT.
+
+Advantages:
+
+- Fast and lightweight.
+- Reliable with Quality of Service (QoS) levels.
+- Efficient for wireless networks.
+
+### HTTP (Hypertext transfer protocol)
+HTTP is a client-server communication protocol commonly used for websites and web APIs.
+
+- A client sends a request, and the server returns a response.
+- Suitable for web dashboards, REST APIs, and cloud communication.
+- Easier to implement but consumes more bandwidth than MQTT.
+
+Advantages:
+
+- Simple and widely supported.
+- Ideal for web applications and cloud services.
+
+Disadvantages:
+
+- Higher network overhead.
+- Less efficient for continuous IoT messaging.
+
+### I2C (inter integrated circuit)
+I2C is a serial communication protocol used for communication between devices on the same circuit board.
+
+Uses only 2 wires:
+- SDA (Data)
+- SCL (Clock)
+- Supports multiple master and slave devices using unique addresses.
+- Commonly used with sensors, OLED displays, RTC modules, and EEPROMs.
+
+Advantages:
+
+- Simple wiring.
+- Multiple devices can share the same bus.
+
+Disadvantages:
+
+- Slower than SPI.
+- Limited communication distance.
+
+### SPI (serial pheripheral interface)
+SPI is a high-speed serial communication protocol for communication between a microcontroller and peripheral devices.
+
+Uses 4 wires:
+- MOSI (Master Out Slave In)
+- MISO (Master In Slave Out)
+- SCK (Clock)
+- CS/SS (Chip Select)
+- Provides full-duplex communication (simultaneous sending and receiving).
+
+Advantages:
+
+- Very fast data transfer.
+- Suitable for displays, SD cards, and high-speed sensors.
+
+Disadvantages:
+
+- Requires more wiring than I2C.
+- Each slave device typically needs its own Chip Select pin.
+
+
+
 
