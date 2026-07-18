@@ -113,8 +113,10 @@ Button debouncing is implemented by introducing a small delay after each button 
 x
 
 - The Physics: The substrate layer absorbs water vapor from the surrounding air.
-​- The Change: As the air gets more humid, the substrate absorbs more water droplets. Because water conducts electricity, this increases the electrical conductivity between the two electrodes (or shifts the electrical resistance).
-​- The Reading: The internal chip measures this change in resistance. Higher moisture leads to lower resistance, which the chip maps directly to a Relative Humidity (RH) percentage
+​
+- The Change: As the air gets more humid, the substrate absorbs more water droplets. Because water conducts electricity, this increases the electrical conductivity between the two electrodes (or shifts the electrical resistance).
+​
+- The Reading: The internal chip measures this change in resistance. Higher moisture leads to lower resistance, which the chip maps directly to a Relative Humidity (RH) percentage
 
 #### Temperature
 For temperature, the DHT11 uses a negative temperature coefficient (NTC) thermistor. A thermistor is essentially a thermal resistor—a variable resistor whose electrical resistance changes drastically based entirely on temperature.
