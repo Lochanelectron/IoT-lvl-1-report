@@ -214,6 +214,95 @@ Disadvantages:
 - Requires more wiring than I2C.
 - Each slave device typically needs its own Chip Select pin.
 
+## Task 3b
+- Publisher: Sends messages to a specific topic.
+- Broker: Receives published messages and forwards them to all subscribed devices.
+- Subscriber: Listens to a topic and performs an action when a message is received.
+
+After powering on, the ESP32 first established a Wi-Fi connection and then connected to the MQTT broker. Once connected, it subscribed to the designated topic and waited for incoming messages. Whenever the publisher transmitted a command, the broker immediately forwarded it to the ESP32. The callback function inside the program processed the received message, identified which LED the command referred to, and set the appropriate GPIO output HIGH or LOW. This enabled real-time wireless control of the LEDs through MQTT without requiring a direct connection between the publisher and the ESP32.
+
+## Task 4
+- The master ESP32 initializes Wi-Fi and starts an HTTP web server.
+- A webpage containing a text input field is served to the user.
+- When a message is submitted, the web server reads the input.
+- The master begins an I²C transmission to the slave's address and sends the message bytes.
+- The slave receives the transmitted bytes through the I²C receive callback function.
+- The received message is stored and displayed on the SSD1306 OLED using the Adafruit SSD1306 library.
+- The OLED updates whenever a new message is received, replacing the previous text.
+
+## Task 5
+will be backk soon :)
+
+## Task 6
+
+<img width="743" height="252" alt="image" src="https://github.com/user-attachments/assets/b650fe1a-9353-4483-b307-76fe0ef64a91" />
+x
+
+- The ESP32 connects to the local Wi-Fi network and starts a web server.
+- A client opens the ESP32's IP address in a browser and enters a message.
+- The web server receives the message through an HTTP request.
+- Each character is searched in a lookup table to obtain its Morse code equivalent.
+- The Morse symbols are interpreted as LED blink patterns:
+- Dot (.) → Short LED ON duration.
+- Dash (-) → Long LED ON duration.
+- Spaces → Longer pause between words.
+- The LED continues blinking until the entire message has been transmitted.
+
+## Task 7
+could not configure SPO2 sensor T-T;
+
+Once the LED is located on the vein, then the LED starts emitting light. Once the heart is pumping, then there will be a flow of blood within the veins. So if we check the blood flow, then we can check the heart rates also.
+
+If the blood flow is sensed then the ambient light sensor will receive more light as they will be reproduced by the flow of blood. This small change within obtained light can be examined over time to decide our pulse rates.
+
+- Connected the pulse sensor to the ESP32's 3.3V, GND, and analog input pin (GPIO34).
+- Configured the ESP32 to connect to a mobile hotspot and start an HTTP web server.
+- Read the analog signal from the pulse sensor and detected heartbeats using a predefined threshold.
+- Calculated the BPM from the time interval between successive beats.
+- Created a web dashboard that periodically fetched the latest BPM value from the ESP32.
+- Displayed the BPM both as a numerical value and as a continuously updating line graph.
+
+## Task 8
+### Core Problem
+A device on a home WiFi network isn't reachable from the open internet by default.
+Most home connections also sit behind CGNAT, ruling out simple port-forwarding.
+The system therefore needed a way for both control and video to cross the internet
+without the car ever needing an inbound-reachable public address, and without
+renting any server.
+ 
+### Design Decision: Public MQTT Broker as the Meeting Point
+Instead of the car listening for incoming connections, both onboard devices
+**connect outward** to a free public MQTT broker (`broker.hivemq.com`). Outbound
+connections pass through NAT/CGNAT without any router configuration. A phone or
+laptop anywhere also connects to the same broker (over MQTT-over-WebSocket, so a
+plain browser page can do it with no app). The broker becomes the shared meeting
+point — nobody needs a public IP.
+ 
+- **Control channel**: browser publishes single-letter commands (`F`/`B`/`L`/`R`/`S`)
+  to a control topic; the ESP32 subscribes and drives the motors accordingly.
+  Round-trip latency over MQTT is low enough (~100-300ms) to feel responsive.
+- **Video channel**: true live video streaming wasn't practical over a public
+  broker (bandwidth/message-size limits, plus this project rules out a VPS which
+  is what real-time video relaying normally needs). Instead, the ESP32-CAM
+  captures a still JPEG every ~1.5s, base64-encodes it, and publishes it to a
+  snapshot topic. The browser decodes and displays it as it arrives — a
+  surveillance-camera cadence, not a video call, but sufficient for the stated goal.
+
+### Security Note
+Public brokers offer no authentication. The mitigation used was a long, random,
+unique topic prefix — functionally like an unlisted URL, not real access control.
+Acceptable for a hobby build; not suitable for anything sensitive.
+
+## Task 9
+The IR flame sensor detects infrared radiation emitted by a flame. When a flame is detected, its digital output changes state, which is read by the ESP32. The ESP32 then establishes a secure internet connection and sends an HTTP request to the Twilio API. Twilio authenticates the request using the Account SID and Auth Token before sending an SMS alert to the specified recipient. To avoid repeated notifications, the program uses a flag that allows only one SMS to be sent until the flame is no longer detected.
+
+- Connected the IR flame sensor to the ESP32 using the digital output pin.
+- Configured the ESP32 to connect to a Wi-Fi network.
+- Programmed the ESP32 to continuously monitor the flame sensor.
+- When a flame was detected, the ESP32 sent an HTTPS POST request to the Twilio REST API containing the sender number, recipient number, and alert message.
+- Twilio processed the request and delivered an SMS notification to the registered mobile number.
+
+
 
 
 
