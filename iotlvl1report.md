@@ -109,7 +109,8 @@ Button debouncing is implemented by introducing a small delay after each button 
 
 ## Task 2
 <img width="500" height="270" alt="image" src="https://github.com/user-attachments/assets/232e4cdf-0591-4297-bbe3-138ff4fd6c59" />
-​- The Physics: The substrate layer absorbs water vapor from the surrounding air.
+​
+- The Physics: The substrate layer absorbs water vapor from the surrounding air.
 ​- The Change: As the air gets more humid, the substrate absorbs more water droplets. Because water conducts electricity, this increases the electrical conductivity between the two electrodes (or shifts the electrical resistance).
 ​- The Reading: The internal chip measures this change in resistance. Higher moisture leads to lower resistance, which the chip maps directly to a Relative Humidity (RH) percentage
 
